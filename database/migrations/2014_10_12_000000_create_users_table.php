@@ -13,42 +13,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); //primary key. unique, autocrement
-            $table->string('name', 100)->nullable();
-            $table->string('email')->unique();
-            $table->string('phone')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('username')->unique();
+            $table->enum('role', ['Driver', 'Passenger']);
+            $table->string('profile_picture')->nullable();
+            $table->string('driver_license')->nullable();
+            $table->string('vehicle_make')->nullable();
+            $table->string('vehicle_model')->nullable();
+            $table->string('license_plate')->nullable()->unique();
             $table->string('password');
-            $table->enum('payment_status', ['paid','unpaid'])->default('unpaid');
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->string('email')->unique()->index();
+            $table->string('phone')->unique()->index();
+            $table->string('username')->index();
         });
-
-        $new = new User;
-        $new->name = "rashed";
-        $new->email = "rashed@email.com";
-        $new->password = "password";
-        $new->save();
-
-        User::create([
-            'name'=>'rashed2',
-            'email'=>'rashed2@email.com',
-            'password'=>'password'
-        ]);
-
-
-
-
-        //updated
-
-        $new = User::find(1);
-        $new->name = "rashed zaman";
-        $new->save();
-
-
-
-        //delete
-        // $new = User::find(1)->delete();
     }
 
     /**
