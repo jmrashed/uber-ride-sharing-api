@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('vehicle_make');
-            $table->string('vehicle_model');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('car_make');
+            $table->string('car_model');
+            $table->integer('car_year');
             $table->string('license_plate')->unique();
+            $table->enum('driver_status', ['online', 'offline'])->default('offline');
+            $table->decimal('current_latitude', 10, 7)->nullable();
+            $table->decimal('current_longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }

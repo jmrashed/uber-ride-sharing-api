@@ -14,9 +14,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('username')->unique();
             $table->enum('role', ['Driver', 'Passenger']);
             $table->string('profile_picture')->nullable();
             $table->string('driver_license')->nullable();
@@ -30,8 +27,8 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->string('email')->unique()->index();
+            $table->string('username')->unique()->index();
             $table->string('phone')->unique()->index();
-            $table->string('username')->index();
         });
     }
 
