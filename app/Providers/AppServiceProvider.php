@@ -9,8 +9,11 @@ use App\Repositories\RideRepository;
 use App\Repositories\TripRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\DriverInterface;
+use App\Repositories\RatingInterface;
 use App\Repositories\BookingInterface;
 use App\Repositories\DriverRepository;
+use App\Repositories\PaymentInterface;
+use App\Repositories\RatingRepository;
 use App\Repositories\BookingRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RideInterface::class, RideRepository::class);
         $this->app->bind(BookingInterface::class, BookingRepository::class);
         $this->app->bind(TripInterface::class, TripRepository::class);
+        $this->app->bind(RatingInterface::class, RatingRepository::class);
+        $this->app->bind(PaymentInterface::class, PaRepository::class);
     }
 
     /**
